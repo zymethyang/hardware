@@ -5,7 +5,7 @@ userRouter.use(bodyParser.json());
 
 //const admin = require('./firebase-admin');
 const firebase = require('./firebase-admin');
-var network = require('network');
+
 
 userRouter.route('/register')
     .all((req, res, next) => {
@@ -65,17 +65,23 @@ userRouter.route('/login')
         res.end('GET operation not supported on /login');
     })
     .post((req, res, next) => {
-        firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
-            .then((result) => {
-                res.statusCode = 200;
-                res.setHeader('Content-Type', 'application/json');
-                res.json('Successful');
-            })
-            .catch(function (error) {
-                res.statusCode = 403;
-                res.setHeader('Content-Type', 'application/json');
-                res.json('Unsuccessful');
-            });
+        if (req.body.email != null && req.body.password != null) {
+            firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
+                .then((result) => {
+                    res.statusCode = 200;
+                    res.setHeader('Content-Type', 'application/json');
+                    res.json('Successful');
+                })
+                .catch(function (error) {
+                    res.statusCode = 403;
+                    res.setHeader('Content-Type', 'application/json');
+                    res.json('Unsuccessful');
+                });
+        } else {
+            res.statusCode = 403;
+            res.setHeader('Content-Type', 'application/json');
+            res.json('Unsuccessful');
+        }
     })
     .put((req, res, next) => {
         res.statusCode = 403;
@@ -152,32 +158,6 @@ userRouter.route('/getStatus')
         res.end('DELETE operation not supported on /getStatus');
     });
 
-userRouter.route('/getIP')
-    .all((req, res, next) => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        next();
-    })
-    .post((req, res, next) => {
-        res.statusCode = 403;
-        res.setHeader('Content-Type', 'application/json');
-        res.end('POST operation not supported on /getIP');
-    })
-    .get((req, res, next) => {
-        res.statusCode = 200;
-        network.get_interfaces_list(function (err, list) {
-            res.setHeader('Content-Type', 'application/json');
-            res.json(list);
-        })
-    })
-    .put((req, res, next) => {
-        res.statusCode = 403;
-        res.end('PUT operation not supported on /getStatus');
-    })
-    .delete((req, res, next) => {
-        res.statusCode = 403;
-        res.end('DELETE operation not supported on /getStatus');
-    });
 
 
 module.exports = userRouter;

@@ -29,6 +29,7 @@ const humidityRouter = require('./humidityRouter');
 app.use('/', router);
 app.use('/temp',tempRouter);
 app.use('/humidity',humidityRouter);
+app.use('/user',userRouter);
 //app.use('/bump',bumpRouter);
 
 
