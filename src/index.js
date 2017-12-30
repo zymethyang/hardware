@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors({credentials: true, origin: '*'}));
 
-const port = process.env.APP_PORT || 3000;
+var port = process.env.PORT || 3000;
 
 const router = require('./routes');
 const userRouter = require('./userRouter');
