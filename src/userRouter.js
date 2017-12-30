@@ -6,7 +6,6 @@ userRouter.use(bodyParser.json());
 //const admin = require('./firebase-admin');
 const firebase = require('./firebase-admin');
 
-
 userRouter.route('/register')
     .all((req, res, next) => {
         res.statusCode = 200;
