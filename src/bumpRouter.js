@@ -1,3 +1,4 @@
+/*
 const express = require('express');
 const bodyParser = require('body-parser');
 const bumpRouter = express.Router();
@@ -98,3 +99,4 @@ bumpRouter.route('/')
         });
 
 module.exports = bumpRouter;
+*/

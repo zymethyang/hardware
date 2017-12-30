@@ -3,10 +3,8 @@ const bodyParser = require('body-parser');
 const tempRouter = express.Router();
 tempRouter.use(bodyParser.json());
 
-const mongoose = require('mongoose');
 const Temps = require('./models/temps');
 const admin = require('firebase-admin');
-var db = admin.firestore();
 const firebase = require("firebase");
 var FieldValue = require("firebase-admin").firestore.FieldValue;
 var moment = require('moment');
