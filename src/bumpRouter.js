@@ -31,7 +31,7 @@ bumpRouter.route('/')
                 res.json('Error');
             });
         } else {
-            console.log(user.uid ||'None' + ' Fail to GET Bump Status !');
+            console.log(' Fail to GET Bump Status !');
             res.statusCode = 403;
             res.json('Error');
         }
@@ -74,7 +74,7 @@ bumpRouter.route('/')
                     res.json('Error');
                 });
             } else {
-                console.log(user.uid ||'None' + ' Fail to GET Bump Status !');
+                console.log(' Fail to GET Bump Status !');
                 res.setHeader('Content-Type', 'application/json');
                 res.statusCode = 403;
                 res.json('Error');
@@ -117,7 +117,7 @@ bumpRouter.route('/')
                     res.json('Error');
                 });
             } else {
-                console.log(user.uid ||'None' + ' Fail to GET Bump Status !');
+                console.log(' Fail to GET Bump Status !');
                 res.setHeader('Content-Type', 'application/json');
                 res.statusCode = 403;
                 res.json('Error');
@@ -160,7 +160,7 @@ bumpRouter.route('/')
                     res.json('Error');
                 });
             } else {
-                console.log(user.uid ||'None' + ' Fail to GET Bump Status !');
+                console.log(' Fail to GET Bump Status !');
                 res.setHeader('Content-Type', 'application/json');
                 res.statusCode = 403;
                 res.json('Error');
