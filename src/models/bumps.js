@@ -2,19 +2,19 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 var statusChema = new Schema({
-    controlCalender:{
+    cCalender:{
       type:Boolean,
       required:true
     },
-    controlHand:{
+    cHand:{
       type:Boolean,
       required:true
     },
-    controlHumidity:{
+    cHumidity:{
       type:Boolean,
       required:true
     },
-    controlTemp:{
+    cTemp:{
       type:Boolean,
       required:true
     },
@@ -27,20 +27,24 @@ var statusChema = new Schema({
       required:false
     },
     time:{
-      type:Number,
+      type:String,
       required:false
     },
     duration:{
       type:Number,
       required:true
     },
-    finishedTime:{
+    to:{
       type:Number,
       required:true
     },
     bump:{
       type:Object,
       required:true
+    },
+    from:{
+      type:Number,
+      required:false
     }
 })
 
