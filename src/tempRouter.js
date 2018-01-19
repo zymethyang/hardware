@@ -9,7 +9,7 @@ var FieldValue = require("firebase-admin").firestore.FieldValue;
 var moment = require('moment');
 
 
-tempRouter.route('/')
+tempRouter.route('/:uid')
     .all((req, res, next) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -22,13 +22,13 @@ tempRouter.route('/')
         res.json(1);
     })
     .post((req, res, next) => {
-        var user = firebase.auth().currentUser || false;
-        if (user) {
-            console.log(user.uid + ' POST Temperature at ' + moment(FieldValue.serverTimestamp()).format("YYYY-MM-DD hh:mm a"));
+        var uid = req.params.uid || false;
+        if (uid) {
+            console.log(uid + ' POST Temperature at ' + moment(FieldValue.serverTimestamp()).format("YYYY-MM-DD hh:mm a"));
             const reducer = (accumulator, currentValue) => accumulator + currentValue;
-            var mean = Object.values(req.body).reduce(reducer) / (Object.values(req.body).length);
+            var mean = Math.round(Object.values(req.body).reduce(reducer) / (Object.values(req.body).length));
             Temps.create({
-                uid: user.uid,
+                uid: uid,
                 temp: req.body,
                 mean: mean,
                 startedAt: moment(FieldValue.serverTimestamp()).unix(),
@@ -41,7 +41,7 @@ tempRouter.route('/')
                 res.statusCode = 403;
                 res.setHeader('Content-Type', 'application/json');
                 res.json('Error');
-                console.error(user.uid + ' POST TEMP error at ' + moment(FieldValue.serverTimestamp()).format("YYYY-MM-DD hh:mm a"), error);
+                console.error(uid + ' POST TEMP error at ' + moment(FieldValue.serverTimestamp()).format("YYYY-MM-DD hh:mm a"), error);
             });
         } else {
             console.log('Fail to POST TEMPORATURE AT ' + moment(FieldValue.serverTimestamp()).format("YYYY-MM-DD hh:mm a"));

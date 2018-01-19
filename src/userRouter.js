@@ -137,7 +137,7 @@ userRouter.route('/getStatus')
         res.end('POST operation not supported on /getStatus');
     })
     .get((req, res, next) => {
-        var user = firebase.auth().currentUser;
+        var user = firebase.auth().currentUser || false;
         if (user) {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
@@ -157,6 +157,37 @@ userRouter.route('/getStatus')
         res.end('DELETE operation not supported on /getStatus');
     });
 
+userRouter.route('/uid')
+    .all((req, res, next) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        next();
+    })
+    .post((req, res, next) => {
+        res.statusCode = 403;
+        res.setHeader('Content-Type', 'application/json');
+        res.end('POST operation not supported on /getStatus');
+    })
+    .get((req, res, next) => {
+        var user = firebase.auth().currentUser || false;
+        if (user) {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(user.uid);
+        } else {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json('Not Logged');
+        }
+    })
+    .put((req, res, next) => {
+        res.statusCode = 403;
+        res.end('PUT operation not supported on /uid');
+    })
+    .delete((req, res, next) => {
+        res.statusCode = 403;
+        res.end('DELETE operation not supported on /uid');
+    });
 
 
 module.exports = userRouter;

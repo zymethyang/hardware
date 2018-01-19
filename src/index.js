@@ -25,13 +25,14 @@ const userRouter = require('./userRouter');
 const tempRouter = require('./tempRouter');
 const humidityRouter = require('./humidityRouter');
 const bumpRouter = require('./bumpRouter');
+const feedbackRouter = require('./feedbackRouter');
 
 app.use('/', router);
 app.use('/temp',tempRouter);
 app.use('/humidity',humidityRouter);
 app.use('/user',userRouter);
 app.use('/bump',bumpRouter);
-
+app.use('/feedback',feedbackRouter);
 
 app.listen(port);
 

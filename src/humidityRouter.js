@@ -8,7 +8,7 @@ const firebase = require("firebase");
 var FieldValue = require("firebase-admin").firestore.FieldValue;
 var moment = require('moment');
 
-humidityRouter.route('/')
+humidityRouter.route('/:uid')
     .all((req, res, next) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -19,13 +19,13 @@ humidityRouter.route('/')
         res.end('GET operation not supported on /humidity');
     })
     .post((req, res, next) => {
-        var user = firebase.auth().currentUser || false;
-        if (user) {
-            console.log(user.uid + ' POST Humidity at ' + moment(FieldValue.serverTimestamp()).format("YYYY-MM-DD hh:mm a"));
+        var uid = req.params.uid || false;
+        if (uid) {
+            console.log(uid + ' POST Humidity at ' + moment(FieldValue.serverTimestamp()).format("YYYY-MM-DD hh:mm a"));
             const reducer = (accumulator, currentValue) => accumulator + currentValue;
-            var mean = Object.values(req.body).reduce(reducer) / (Object.values(req.body).length);
+            var mean =  Math.round(Object.values(req.body).reduce(reducer) / (Object.values(req.body).length));
             Humiditys.create({
-                uid: user.uid,
+                uid: uid,
                 humidity: req.body,
                 mean: mean,
                 startedAt: moment(FieldValue.serverTimestamp()).unix(),
