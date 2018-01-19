@@ -4,7 +4,6 @@ const humidityRouter = express.Router();
 humidityRouter.use(bodyParser.json());
 
 const Humiditys = require('./models/humiditys');
-const firebase = require("firebase");
 var FieldValue = require("firebase-admin").firestore.FieldValue;
 var moment = require('moment');
 

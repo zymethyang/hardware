@@ -4,7 +4,6 @@ const bumpRouter = express.Router();
 bumpRouter.use(bodyParser.json());
 
 const Bumps = require('./models/bumps');
-const firebase = require('firebase');
 var FieldValue = require('firebase-admin').firestore.FieldValue;
 var moment = require('moment');
 

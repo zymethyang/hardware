@@ -4,7 +4,6 @@ const feedbackRouter = express.Router();
 feedbackRouter.use(bodyParser.json());
 
 const Feedback = require('./models/feedback');
-const firebase = require('firebase');
 var FieldValue = require('firebase-admin').firestore.FieldValue;
 var moment = require('moment');
 
