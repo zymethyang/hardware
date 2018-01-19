@@ -4,7 +4,6 @@ const tempRouter = express.Router();
 tempRouter.use(bodyParser.json());
 
 const Temps = require('./models/temps');
-const firebase = require("firebase");
 var FieldValue = require("firebase-admin").firestore.FieldValue;
 var moment = require('moment');
 
