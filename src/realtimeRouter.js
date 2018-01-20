@@ -16,9 +16,8 @@ realtimeRouter.route('/:uid')
         next();
     })
     .get((req, res, next) => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(1);
+        res.statusCode = 403;
+        res.end('GET operation not supported on /realtime');
     })
     .post((req, res, next) => {
         var uid = req.params.uid || false;
