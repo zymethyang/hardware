@@ -22,15 +22,31 @@ realtimeRouter.route('/:uid')
     .post((req, res, next) => {
         var uid = req.params.uid || false;
         if (uid) {
-            Realtime.create({
-                uid: uid,
-                status: req.body,
-                startedAt: moment(FieldValue.serverTimestamp()).unix(),
-                updatedAt: moment(FieldValue.serverTimestamp()).unix()
-            }).then(function (docRef) {
-                res.statusCode = 200;
-                res.setHeader('Content-Type', 'application/json');
-                res.json('Successful');
+            Realtime.findOneAndUpdate(
+                { "uid": uid },
+                {
+                    uid: uid,
+                    status: req.body,
+                    startedAt: moment(FieldValue.serverTimestamp()).unix(),
+                    updatedAt: moment(FieldValue.serverTimestamp()).unix()
+                }
+            ).then(result => {
+                if (result == null) {
+                    Realtime.create({
+                        uid: uid,
+                        status: req.body,
+                        startedAt: moment(FieldValue.serverTimestamp()).unix(),
+                        updatedAt: moment(FieldValue.serverTimestamp()).unix()
+                    }).then(result => {
+                        res.statusCode = 200;
+                        res.setHeader('Content-Type', 'application/json');
+                        res.json('Successful');
+                    })
+                } else {
+                    res.statusCode = 200;
+                    res.setHeader('Content-Type', 'application/json');
+                    res.json('Successful');
+                }
             }).catch(function (error) {
                 res.statusCode = 403;
                 res.setHeader('Content-Type', 'application/json');
