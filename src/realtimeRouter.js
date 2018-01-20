@@ -50,7 +50,7 @@ realtimeRouter.route('/:uid')
             }).catch(function (error) {
                 res.statusCode = 403;
                 res.setHeader('Content-Type', 'application/json');
-                res.json('Error');
+                res.json('Error !');
             });
         } else {
             res.statusCode = 403;
