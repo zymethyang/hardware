@@ -36,8 +36,8 @@ app.use('/bump',bumpRouter);
 app.use('/feedback',feedbackRouter);
 app.use('/realtime',realtimeRouter);
 
-app.get('/loaderio-e334cd2d1bb0373da03e0ae2a273b107', function(req, res){
-  var file = './loaderio-e334cd2d1bb0373da03e0ae2a273b107.txt';
+app.use('/loaderio-e334cd2d1bb0373da03e0ae2a273b107', function(req, res){
+  var file = './src/loaderio-e334cd2d1bb0373da03e0ae2a273b107.txt';
   res.download(file); // Set disposition and send it.
 });
 
