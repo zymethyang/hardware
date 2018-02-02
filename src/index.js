@@ -28,6 +28,7 @@ const bumpRouter = require('./bumpRouter');
 const feedbackRouter = require('./feedbackRouter');
 const realtimeRouter = require('./realtimeRouter');
 const errorRouter = require('./errorRouter');
+//const messagingRouter = require('./messagingRouter');
 
 app.use('/', router);
 app.use('/temp',tempRouter);
@@ -37,6 +38,7 @@ app.use('/bump',bumpRouter);
 app.use('/feedback',feedbackRouter);
 app.use('/realtime',realtimeRouter);
 app.use('/error',errorRouter);
+//app.use('/messaging',messagingRouter);
 
 app.use('/loaderio-e334cd2d1bb0373da03e0ae2a273b107', function(req, res){
   var file = './src/loaderio-e334cd2d1bb0373da03e0ae2a273b107.txt';
