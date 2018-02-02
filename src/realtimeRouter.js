@@ -22,6 +22,17 @@ realtimeRouter.route('/:uid')
     .post((req, res, next) => {
         var uid = req.params.uid || false;
         if (uid) {
+            var mqtt = require('mqtt');
+            var client  = mqtt.connect({
+                host:'195.181.246.243',
+                port:'1883',
+                password:'987654321',
+                username:'sammy'
+            });
+            client.on('connect', function () {
+              client.subscribe(uid+'/realtime')
+              client.publish(uid+'/realtime',Buffer.from(JSON.stringify(req.body)));
+            })
             Realtime.findOneAndUpdate(
                 { "uid": uid },
                 {
