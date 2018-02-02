@@ -30,8 +30,9 @@ realtimeRouter.route('/:uid')
                 username:'sammy'
             });
             client.on('connect', function () {
-              client.subscribe(uid+'/realtime')
-              client.publish(uid+'/realtime',Buffer.from(JSON.stringify(req.body)));
+              var nUid = (uid+'/realtime').toString();
+              client.subscribe(nUid)
+              client.publish(nUid,Buffer.from(JSON.stringify(req.body)));
             })
             Realtime.findOneAndUpdate(
                 { "uid": uid },
